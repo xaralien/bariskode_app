@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#0D47A1</color>
     <color name="white">#FFFFFFFF</color>
     <color name="splash_bg">#000000</color>
+    <color name="status_bar">#FFFFFF</color>
 </resources>
