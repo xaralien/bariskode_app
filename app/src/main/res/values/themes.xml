@@ -2,4 +2,11 @@
     <style name="Theme.NS1App" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="21">@color/colorPrimaryDark</item>
     </style>
+
+    <!-- Shown the instant the icon is tapped, before the WebView loads -->
+    <style name="Theme.NS1App.Launch" parent="Theme.NS1App">
+        <item name="android:windowBackground">@color/splash_bg</item>
+        <item name="android:statusBarColor" tools:targetApi="21">@color/splash_bg</item>
+        <item name="android:navigationBarColor" tools:targetApi="21">@color/splash_bg</item>
+    </style>
 </resources>

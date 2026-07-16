@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var webView: WebView
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
+    private lateinit var splashOverlay: View
+    private var splashHidden = false
 
     // State for <input type="file"> uploads
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
@@ -81,12 +83,18 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Switch from the launch (splash) theme to the normal app theme
+        setTheme(R.style.Theme_NS1App)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         webView = findViewById(R.id.webView)
         progressBar = findViewById(R.id.progressBar)
         swipeRefresh = findViewById(R.id.swipeRefresh)
+        splashOverlay = findViewById(R.id.splashOverlay)
+
+        // Safety net: hide the splash after 12s even if the page never reports "finished"
+        splashOverlay.postDelayed({ hideSplash() }, 12000)
 
         requestInitialPermissions()
         configureWebView()
@@ -174,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
             swipeRefresh.isRefreshing = false
+            hideSplash()
         }
     }
 
@@ -313,6 +322,16 @@ class MainActivity : AppCompatActivity() {
     private fun hasLocationPermission() =
         hasPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
             hasPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+
+    private fun hideSplash() {
+        if (splashHidden) return
+        splashHidden = true
+        splashOverlay.animate()
+            .alpha(0f)
+            .setDuration(350)
+            .withEndAction { splashOverlay.visibility = View.GONE }
+            .start()
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

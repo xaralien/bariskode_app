@@ -3,4 +3,5 @@
     <color name="colorPrimary">#1565C0</color>
     <color name="colorPrimaryDark">#0D47A1</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="splash_bg">#000000</color>
 </resources>

@@ -22,4 +22,24 @@
         android:layout_alignParentTop="true"
         android:max="100"
         android:visibility="gone" />
+
+    <!-- Splash overlay: black screen + centered logo, shown until the page loads -->
+    <FrameLayout
+        android:id="@+id/splashOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/splash_bg"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/splashLogo"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/splash_logo" />
+    </FrameLayout>
 </RelativeLayout>
